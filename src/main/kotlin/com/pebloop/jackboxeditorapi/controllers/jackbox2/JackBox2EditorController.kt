@@ -2,7 +2,7 @@ package com.pebloop.jackboxeditorapi.controllers.jackbox2
 
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
-import jackbox.editor.core.jackbox2.core.Jackbox2CoreEditor
+import jackbox.editor.core.editors.jackbox2.core.Jackbox2CoreEditor
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
