@@ -31,6 +31,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation(files("libs/lib-0.1.0.jar"))
+	implementation(fileTree(mapOf("dir" to "libs/ffdec", "include" to listOf("*.jar"))))
 	implementation(group= "org.springdoc", name= "springdoc-openapi-starter-webmvc-ui", version= "2.0.2")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
