@@ -59,5 +59,39 @@ class Jackbox2EditorController {
         return jb2ce.modifyGamePickerData(json)
     }
 
+    @PostMapping("/GamePicker/settings/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    fun postJackbox2CoreImageSettings(@RequestPart(value = "GamePicker")
+                             @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
+                             @RequestPart(value = "image")
+                             @Schema(type = "string", format = "binary") image: MultipartFile,
+    ): ByteArray{
+        val jb2ce = Jackbox2CoreEditor()
+        jb2ce.setSwfGamePicker(fileGamePicker.inputStream)
+        return jb2ce.modifyGamePickerImageSettings(image.bytes)
+    }
+
+    @PostMapping("/GamePicker/instructions/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    fun postJackbox2CoreImageInstructions(@RequestPart(value = "GamePicker")
+                             @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
+                             @RequestPart(value = "image")
+                             @Schema(type = "string", format = "binary") image: MultipartFile,
+    ): ByteArray{
+        val jb2ce = Jackbox2CoreEditor()
+        jb2ce.setSwfGamePicker(fileGamePicker.inputStream)
+        return jb2ce.modifyGamePickerImageInstructions(image.bytes)
+    }
+
+    @PostMapping("/GamePicker/instructions2/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    fun postJackbox2CoreImageInstructions2(@RequestPart(value = "GamePicker")
+                             @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
+                             @RequestPart(value = "image")
+                             @Schema(type = "string", format = "binary") image: MultipartFile,
+    ): ByteArray{
+        val jb2ce = Jackbox2CoreEditor()
+        jb2ce.setSwfGamePicker(fileGamePicker.inputStream)
+        return jb2ce.modifyGamePickerImageInstructions2(image.bytes)
+    }
+
+
 
 }
