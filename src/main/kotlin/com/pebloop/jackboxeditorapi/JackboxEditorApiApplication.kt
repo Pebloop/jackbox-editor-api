@@ -1,5 +1,7 @@
 package com.pebloop.jackboxeditorapi
 
+import io.swagger.v3.oas.models.OpenAPI
+import io.swagger.v3.oas.models.info.Info
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -27,3 +29,12 @@ fun commandLineRunner(ctx: ApplicationContext): CommandLineRunner? {
 	}
 }
 
+@Bean
+fun usersMicroserviceOpenAPI(): OpenAPI? {
+	return OpenAPI()
+		.info(
+			Info().title("Jackbox Editor API")
+				.description("Allow to edit Jackbox games")
+				.version("1.0")
+		)
+}
