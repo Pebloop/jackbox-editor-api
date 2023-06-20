@@ -2,7 +2,7 @@ package com.pebloop.jackboxeditorapi.controllers.jackbox2
 
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
-import jackbox.editor.core.JackBoxEditor
+import jackbox.editor.core.jackbox2.core.Jackbox2CoreEditor
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
@@ -14,18 +14,19 @@ import org.springframework.web.multipart.MultipartFile
 class Jackbox2EditorController {
 
     @PostMapping("/getData",consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-    public fun GetJackbox2CoreData(
-    @RequestPart(value = "JBPP2Picker")
-    @Schema(type = "string", format = "binary") fileJBPP2Picker: MultipartFile): String {
-        JackBoxEditor.getGameEditor(fileJBPP2Picker.inputStream)
-        return "test"
+    public fun getJackbox2CoreData(
+    @RequestPart(value = "GamePicker")
+    @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile): String {
+        val jb2ce = Jackbox2CoreEditor(fileGamePicker.inputStream)
+        return jb2ce.data
     }
 
-    @PostMapping("/")
-    fun postJackbox2CoreData(@RequestParam files: MultipartFile,
-                                @RequestParam gameName: String,
-                             ): String {
-        //JackBoxEditor.getGameEditor(path)
-        return "test"
+    @PostMapping("/applyModifications", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    fun postJackbox2CoreData(@RequestPart(value = "GamePicker")
+                             @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
+                                @RequestParam json : String,
+                             ): ByteArray{
+        val jb2ce = Jackbox2CoreEditor(fileGamePicker.inputStream)
+        return jb2ce.modifyData(json)
     }
 }
