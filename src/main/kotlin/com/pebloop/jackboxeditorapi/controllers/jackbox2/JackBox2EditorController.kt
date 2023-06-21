@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile
 class Jackbox2EditorController {
 
     @PostMapping("/GamePicker/get",consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-    public fun getJackbox2CoreData(
+    public fun getJackbox2CoreGamePickerData(
     @RequestPart(value = "GamePicker")
     @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile): String {
         val jb2ce = Jackbox2CoreEditor()
@@ -23,7 +23,7 @@ class Jackbox2EditorController {
     }
 
     @PostMapping("/GamePicker/image/settings/get",consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE), produces = arrayOf(MediaType.IMAGE_PNG_VALUE))
-    public fun getJackbox2CoreImageSettings(
+    public fun getJackbox2CoreGamePickerImageSettings(
         @RequestPart(value = "GamePicker")
         @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile): ByteArray {
         val jb2ce = Jackbox2CoreEditor()
@@ -32,7 +32,7 @@ class Jackbox2EditorController {
     }
 
     @PostMapping("/GamePicker/image/instructions/get",consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE), produces = arrayOf(MediaType.IMAGE_PNG_VALUE))
-    public fun getJackbox2CoreImageInstructions(
+    public fun getJackbox2CoreGamePickerImageInstructions(
         @RequestPart(value = "GamePicker")
         @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile): ByteArray {
         val jb2ce = Jackbox2CoreEditor()
@@ -41,7 +41,7 @@ class Jackbox2EditorController {
     }
 
     @PostMapping("/GamePicker/image/instructions2/get",consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE), produces = arrayOf(MediaType.IMAGE_PNG_VALUE))
-    public fun getJackbox2CoreImageInstructions2(
+    public fun getJackbox2CoreGamePickerImageInstructions2(
         @RequestPart(value = "GamePicker")
         @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile): ByteArray {
         val jb2ce = Jackbox2CoreEditor()
@@ -50,7 +50,7 @@ class Jackbox2EditorController {
     }
 
     @PostMapping("/GamePicker/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-    fun postJackbox2CoreData(@RequestPart(value = "GamePicker")
+    fun postJackbox2CoreGamePickerData(@RequestPart(value = "GamePicker")
                              @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
                                 @RequestParam json : String,
                              ): ByteArray{
@@ -60,7 +60,7 @@ class Jackbox2EditorController {
     }
 
     @PostMapping("/GamePicker/settings/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-    fun postJackbox2CoreImageSettings(@RequestPart(value = "GamePicker")
+    fun postJackbox2CoreGamePickerImageSettings(@RequestPart(value = "GamePicker")
                              @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
                              @RequestPart(value = "image")
                              @Schema(type = "string", format = "binary") image: MultipartFile,
@@ -71,7 +71,7 @@ class Jackbox2EditorController {
     }
 
     @PostMapping("/GamePicker/instructions/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-    fun postJackbox2CoreImageInstructions(@RequestPart(value = "GamePicker")
+    fun postJackbox2CoreGamePickerImageInstructions(@RequestPart(value = "GamePicker")
                              @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
                              @RequestPart(value = "image")
                              @Schema(type = "string", format = "binary") image: MultipartFile,
@@ -82,7 +82,7 @@ class Jackbox2EditorController {
     }
 
     @PostMapping("/GamePicker/instructions2/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
-    fun postJackbox2CoreImageInstructions2(@RequestPart(value = "GamePicker")
+    fun postJackbox2CoreGamePickerImageInstructions2(@RequestPart(value = "GamePicker")
                              @Schema(type = "string", format = "binary") fileGamePicker: MultipartFile,
                              @RequestPart(value = "image")
                              @Schema(type = "string", format = "binary") image: MultipartFile,
@@ -93,5 +93,25 @@ class Jackbox2EditorController {
     }
 
 
+    // PauseDialog.swf
+
+    @PostMapping("/PauseDialog/get",consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    public fun getJackbox2CorePauseDialogData(
+        @RequestPart(value = "PauseDialog")
+        @Schema(type = "string", format = "binary") filePauseDialog: MultipartFile): String {
+        val jb2ce = Jackbox2CoreEditor()
+        jb2ce.setSwfPauseDialog(filePauseDialog.inputStream)
+        return jb2ce.pauseDialogData
+    }
+
+    @PostMapping("/PauseDialog/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    fun postJackbox2CorePauseDialogData(@RequestPart(value = "PauseDialog")
+                             @Schema(type = "string", format = "binary") filePauseDialog: MultipartFile,
+                             @RequestParam json : String,
+    ): ByteArray{
+        val jb2ce = Jackbox2CoreEditor()
+        jb2ce.setSwfPauseDialog(filePauseDialog.inputStream)
+        return jb2ce.modifyPauseDialogData(json)
+    }
 
 }
