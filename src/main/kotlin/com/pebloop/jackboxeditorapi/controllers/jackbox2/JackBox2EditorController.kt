@@ -114,4 +114,23 @@ class Jackbox2EditorController {
         return jb2ce.modifyPauseDialogData(json)
     }
 
+    @PostMapping("/content/get",consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    public fun getJackbox2CoreContentData(
+        @RequestPart(value = "content")
+        @Schema(type = "string", format = "binary") fileContent: MultipartFile): String {
+        val jb2ce = Jackbox2CoreEditor()
+        jb2ce.setJsonContent(fileContent.inputStream)
+        return jb2ce.contentData
+    }
+
+    @PostMapping("/content/post", consumes= arrayOf(MediaType.MULTIPART_FORM_DATA_VALUE))
+    fun postJackbox2CoreContentData(@RequestPart(value = "content")
+                                        @Schema(type = "string", format = "binary") fileContent: MultipartFile,
+                                        @RequestParam json : String,
+    ): ByteArray{
+        val jb2ce = Jackbox2CoreEditor()
+        jb2ce.setJsonContent(fileContent.inputStream)
+        return jb2ce.modifyContentData(json)
+    }
+
 }
